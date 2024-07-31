@@ -1,0 +1,10 @@
+body {
+  background-color: #000000;
+}
+
+.bg-honda {
+  background-image: url("./src/images/honda-background.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
