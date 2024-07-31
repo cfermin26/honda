@@ -1,7 +1,10 @@
+import { StaticImage } from "gatsby-plugin-image";
 import * as React from "react";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
+import { Autoplay, Navigation, Pagination } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
 import "../../styles.css";
 
 import { ReactImageTurntable } from "react-image-turntable";
@@ -24,6 +27,34 @@ const IndexPage = () => {
               alt="creta exterior"
               layout="fullWidth"
             /> */}
+          </Col>
+        </Row>
+        <Row>
+          <Col md={6}></Col>
+          <Col md={6}>
+            <Swiper
+              modules={[Pagination, Navigation, Autoplay]}
+              autoplay={{ delay: 5000 }}
+              navigation={true}
+              pagination={{ clickable: true }}
+              loop={true}
+              slidesPerView={1}
+            >
+              <SwiperSlide>
+                <StaticImage
+                  src="../images/galeria/450/450-galeria.jpg"
+                  alt="honda 450"
+                  layout="fullWidth"
+                />
+              </SwiperSlide>
+              <SwiperSlide>
+                <StaticImage
+                  src="../images/galeria/450/450-galeria.jpg"
+                  alt="honda 450"
+                  layout="fullWidth"
+                />
+              </SwiperSlide>
+            </Swiper>
           </Col>
         </Row>
       </Container>
