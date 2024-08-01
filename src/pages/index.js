@@ -7,11 +7,10 @@ import {
   ReactCompareSlider,
   ReactCompareSliderImage,
 } from "react-compare-slider";
+import { ReactImageTurntable } from "react-image-turntable";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "../../styles.css";
-
-import { ReactImageTurntable } from "react-image-turntable";
 import { images450 } from "../constants/450";
 
 const IndexPage = () => {
@@ -66,17 +65,21 @@ const IndexPage = () => {
             <ReactCompareSlider
               itemOne={
                 <ReactCompareSliderImage
-                  src="../images/compare/450/450-motor.png"
-                  alt="honda 450 motor"
+                  src="https://landinghonda.curbe.com.ec/slider/450-motor.png"
+                  alt="Image one"
                 />
               }
               itemTwo={
                 <ReactCompareSliderImage
-                  src="../images/compare/450/450-chasis.png"
-                  alt="honda 450 chasis"
+                  src="https://landinghonda.curbe.com.ec/slider/450-chasis.png"
+                  alt="Image two"
+                  style={{
+                    backgroundColor: "black",
+                  }}
                 />
               }
             />
+            ;
           </Col>
         </Row>
       </Container>
