@@ -3,6 +3,10 @@ import * as React from "react";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
+import {
+  ReactCompareSlider,
+  ReactCompareSliderImage,
+} from "react-compare-slider";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "../../styles.css";
@@ -55,6 +59,24 @@ const IndexPage = () => {
                 />
               </SwiperSlide>
             </Swiper>
+          </Col>
+        </Row>
+        <Row>
+          <Col md={12}>
+            <ReactCompareSlider
+              itemOne={
+                <ReactCompareSliderImage
+                  src="../images/compare/450/450-motor.png"
+                  alt="honda 450 motor"
+                />
+              }
+              itemTwo={
+                <ReactCompareSliderImage
+                  src="../images/compare/450/450-chasis.png"
+                  alt="honda 450 chasis"
+                />
+              }
+            />
           </Col>
         </Row>
       </Container>
