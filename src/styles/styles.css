@@ -1,0 +1,74 @@
+body {
+  background-color: #000000;
+}
+
+.bg-honda {
+  background-image: url("../images/450/360/honda-background.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+@font-face {
+  font-display: swap;
+  font-family: Bourgeois-Bold-Condensed;
+  src: url("@fonts/Bourgeois-Bold-Condensed.otf") format("opentype");
+}
+
+@font-face {
+  font-display: swap;
+  font-family: Bourgeois-Bold;
+  src: url("@fonts/Bourgeois-Bold.otf") format("opentype");
+}
+
+@font-face {
+  font-display: swap;
+  font-family: Bourgeois-Light-Condensed;
+  src: url("@fonts/Bourgeois-Light-Condensed.otf") format("opentype");
+}
+
+@font-face {
+  font-display: swap;
+  font-family: Bourgeois-Medium-Condensed;
+  src: url("@fonts/Bourgeois-Medium-Condensed.otf") format("opentype");
+}
+
+@font-face {
+  font-display: swap;
+  font-family: Bourgeois-Medium;
+  src: url("@fonts/Bourgeois-Medium.otf") format("opentype");
+}
+
+.subtitle {
+  font-family: Bourgeois-Medium-Condensed;
+  color: #ffffff;
+  text-transform: uppercase;
+}
+
+.subtitle-bold {
+  font-family: Bourgeois-Bold;
+  color: #ffffff;
+  text-transform: uppercase;
+}
+
+.text {
+  font-family: Bourgeois-Light-Condensed;
+  color: #ffffff;
+  text-transform: uppercase;
+}
+
+.video-container {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%; /* 16:9 aspect ratio (divide 9 by 16 = 0.5625) */
+  height: 0;
+}
+
+.video-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
