@@ -9,6 +9,7 @@ import {
   ReactCompareSlider,
   ReactCompareSliderImage,
 } from "react-compare-slider";
+import { Helmet } from "react-helmet";
 import { ReactImageTurntable } from "react-image-turntable";
 import ModalVideo from "react-modal-video";
 import "react-modal-video/css/modal-video.min.css";
@@ -29,6 +30,45 @@ const IndexPage = () => {
 
   return (
     <main>
+      <Helmet>
+        <title>Honda</title>
+        <meta
+          name="description"
+          content="Descubre la nueva CRF450R, la máquina MX completa con control total para el piloto. Rediseño de ruedas liderado por HRC y arranque eléctrico de serie."
+        />
+        <meta name="keywords" content="Honda, 250, 450, racing, crf" />
+        <meta property="og:url" content="https://landinghonda.curbe.com.ec" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Honda" />
+        <meta
+          property="og:description"
+          content="Descubre la nueva CRF450R, la máquina MX completa con control total para el piloto. Rediseño de ruedas liderado por HRC y arranque eléctrico de serie."
+        />
+        <meta
+          property="og:image"
+          content="https://landinghonda.curbe.com.ec/assets/social/honda-social.jpg"
+        />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta property="twitter:domain" content="landinghonda.curbe.com.ec" />
+        <meta
+          property="twitter:url"
+          content="https://landinghonda.curbe.com.ec"
+        />
+        <meta name="twitter:title" content="Honda" />
+        <meta
+          name="twitter:description"
+          content="Descubre la nueva CRF450R, la máquina MX completa con control total para el piloto. Rediseño de ruedas liderado por HRC y arranque eléctrico de serie."
+        />
+        <meta
+          name="twitter:image"
+          content="https://landinghonda.curbe.com.ec/assets/social/honda-social.jpg"
+        />
+        <script
+          defer
+          type="text/javascript"
+          src="//cdn.evgnet.com/beacon/astaramobilitysl/colombia/scripts/evergage.min.js"
+        ></script>
+      </Helmet>
       {mostrarComponente ? (
         <Container>
           <Row>
@@ -757,22 +797,3 @@ const IndexPage = () => {
 };
 
 export default IndexPage;
-
-export const Head = () => (
-  <>
-    <title>Honda</title>
-    <meta
-      name="description"
-      content="Descubre la nueva CRF450R, la máquina MX completa con control total para el piloto. Rediseño de ruedas liderado por HRC y arranque eléctrico de serie."
-    />
-    <meta property="og:title" content="Honda" />
-    <meta
-      property="og:description"
-      content="Descubre la nueva CRF450R, la máquina MX completa con control total para el piloto. Rediseño de ruedas liderado por HRC y arranque eléctrico de serie."
-    />
-    <meta
-      property="og:image"
-      content="https://landinghonda.curbe.com.ec/assets/social/honda-social.jpg"
-    />
-  </>
-);
