@@ -17,7 +17,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import Footer from "../components/Footer";
 
 const IndexPage = () => {
-  const [mostrarComponente, setMostrarComponente] = useState(false);
+  const [mostrarComponente, setMostrarComponente] = useState(true);
   const handleClick = (componente) => {
     setMostrarComponente(componente);
   };
