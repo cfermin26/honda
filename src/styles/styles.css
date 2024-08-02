@@ -1,9 +1,20 @@
 body {
-  background-color: #000000;
+  background-color: #000000 !important;
 }
 
 .bg-honda {
   background-image: url("../images/450/360/honda-background.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.bg-honda img {
+  cursor: pointer;
+}
+
+.bg-racing {
+  background-image: url("../images/assets/honda-racing-logo.png");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -39,36 +50,171 @@ body {
   src: url("@fonts/Bourgeois-Medium.otf") format("opentype");
 }
 
+.image-container {
+  display: inline-block;
+  position: relative;
+}
+
+.btn-left,
+.btn-right {
+  cursor: pointer;
+  padding: 10px 20px;
+  position: absolute;
+}
+
+.size {
+  width: 13px;
+}
+
+.btn-left {
+  left: 10px;
+  margin-top: -22%;
+  top: 6px;
+  transition: ease 0.3s;
+}
+
+.btn-left:hover {
+  transform: scale(1.1);
+  transition: ease 0.3s;
+}
+
+.btn-right {
+  margin-top: -22%;
+  right: 10px;
+  top: 6px;
+}
+
+.btn-right:hover {
+  transform: scale(1.1);
+  transition: ease 0.3s;
+}
+
+.text-gray {
+  color: #4d4d4d !important;
+}
+
 .subtitle {
-  font-family: Bourgeois-Medium-Condensed;
   color: #ffffff;
-  text-transform: uppercase;
+  font-family: Bourgeois-Medium-Condensed;
+  font-size: 24px;
+  letter-spacing: 1.5px;
 }
 
 .subtitle-bold {
-  font-family: Bourgeois-Bold;
   color: #ffffff;
-  text-transform: uppercase;
+  font-family: Bourgeois-Bold;
+  font-size: 24px;
+  letter-spacing: 1.5px;
 }
 
 .text {
-  font-family: Bourgeois-Light-Condensed;
   color: #ffffff;
-  text-transform: uppercase;
+  font-family: Bourgeois-Light-Condensed;
+  font-size: 16px;
+  letter-spacing: 1px;
+}
+
+.text-justify {
+  text-align: justify;
 }
 
 .video-container {
+  height: 0;
+  padding-bottom: 56.25%; /* 16:9 aspect ratio (divide 9 by 16 = 0.5625) */
   position: relative;
   width: 100%;
-  padding-bottom: 56.25%; /* 16:9 aspect ratio (divide 9 by 16 = 0.5625) */
-  height: 0;
 }
 
 .video-container iframe {
+  border: 0;
+  height: 100%;
+  left: 0;
   position: absolute;
   top: 0;
-  left: 0;
   width: 100%;
-  height: 100%;
-  border: 0;
+}
+
+.carousel .swiper-button-prev:after,
+.carousel .swiper-button-next:after {
+  background-color: rgba(0, 0, 0, 0.6);
+  color: #e7e7e7;
+  font-size: 18px !important;
+  padding: 8px;
+}
+
+.carousel .swiper-button-prev,
+.carousel .swiper-container-rtl .swiper-button-next {
+  left: 0 !important;
+}
+
+.carousel .swiper-button-next,
+.carousel .swiper-container-rtl .swiper-button-prev {
+  right: 0 !important;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: #e7e7e7;
+}
+
+.footer-logos {
+  max-width: 500px;
+}
+
+.footer-border {
+  border-bottom: 1px solid #4d4d4d;
+  border-top: 1px solid #4d4d4d;
+}
+
+.footer-title {
+  font-size: 16px;
+}
+
+.footer-social {
+  color: #4d4d4d;
+  font-size: 18px;
+}
+
+.footer-social a {
+  color: #4d4d4d;
+  font-size: 18px;
+}
+
+.copyright {
+  font-family: Bourgeois-Medium;
+  font-size: 14px;
+  letter-spacing: 1px;
+}
+
+@media (max-width: 575.98px) {
+  .crf-logo {
+    max-width: 100px;
+  }
+
+  .modelo-logo {
+    max-width: 200px;
+  }
+
+  .image-container {
+    display: inline-block;
+    position: relative;
+  }
+
+  .btn-left,
+  .btn-right {
+    padding: 0;
+  }
+
+  .size {
+    width: 5px;
+  }
+
+  .btn-left {
+    left: 1px;
+    margin-top: -24%;
+  }
+
+  .btn-right {
+    margin-top: -24%;
+    right: 1px;
+  }
 }
