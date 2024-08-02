@@ -2,14 +2,22 @@ body {
   background-color: #000000 !important;
 }
 
-.bg-honda {
+.bg-450 {
   background-image: url("../images/450/360/honda-background.png");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 }
 
-.bg-honda img {
+.bg-250 {
+  background-image: url("../images/250/360/honda-background.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.bg-450 img,
+.bg-250 img {
   cursor: pointer;
 }
 
