@@ -36,6 +36,6 @@
     "react-dom": "^18.3.1",
     "react-image-turntable": "^3.1.2",
     "react-modal-video": "^2.0.2",
-    "swiper": "^11.1.8"
+    "swiper": "^11.1.9"
   }
 }

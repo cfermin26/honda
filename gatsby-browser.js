@@ -1,3 +1,4 @@
+import "@styles/styles.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "swiper/css";
 import "swiper/css/effect-fade";
