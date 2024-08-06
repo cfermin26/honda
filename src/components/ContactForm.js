@@ -2,7 +2,6 @@ import { SAVE_LEAD } from "@constants";
 import endPoints from "@services/api";
 import { authenticate, fetchData } from "@services/api/utils";
 import axios from "axios";
-import "bootstrap/dist/css/bootstrap.min.css";
 import React, { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
