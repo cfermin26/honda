@@ -39,7 +39,7 @@ module.exports = {
           "@components": "src/components",
           "@images": "src/images",
           "@videos": "src/videos",
-          "@docs": "src/docs",
+          "@services": "src/services",
           "@pages": "src/pages",
           "@styles": "src/styles",
           "@fonts": "src/fonts",

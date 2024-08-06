@@ -19,6 +19,7 @@
     "@fortawesome/free-regular-svg-icons": "^6.6.0",
     "@fortawesome/free-solid-svg-icons": "^6.6.0",
     "@fortawesome/react-fontawesome": "^0.2.2",
+    "axios": "^1.7.3",
     "bootstrap": "^5.3.3",
     "gatsby": "^5.13.7",
     "gatsby-plugin-alias-imports": "^1.0.5",
@@ -34,8 +35,13 @@
     "react-bootstrap": "^2.10.4",
     "react-compare-slider": "^3.1.0",
     "react-dom": "^18.3.1",
+    "react-hook-form": "^7.52.2",
     "react-image-turntable": "^3.1.2",
     "react-modal-video": "^2.0.2",
+    "sweetalert2": "^11.12.4",
     "swiper": "^11.1.9"
+  },
+  "devDependencies": {
+    "prettier": "^3.3.3"
   }
 }

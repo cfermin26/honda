@@ -58,6 +58,25 @@ body {
   src: url("@fonts/Bourgeois-Medium.otf") format("opentype");
 }
 
+.contact-form {
+  max-width: 800px;
+}
+
+.contact-form p {
+  color: #ffffff;
+  font-family: Bourgeois-Medium;
+  font-size: 14px;
+  letter-spacing: 1px;
+  margin-bottom: 0;
+}
+
+.terminos label {
+  color: #ffffff;
+  font-family: Bourgeois-Medium;
+  font-size: 18px;
+  letter-spacing: 1px;
+}
+
 .image-container {
   display: inline-block;
   position: relative;

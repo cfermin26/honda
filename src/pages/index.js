@@ -1,14 +1,15 @@
+import ContactForm from "@components/ContactForm";
+import Footer from "@components/Footer";
+import Gallery250 from "@components/Gallery250";
+import Gallery450 from "@components/Gallery450";
+import Interviews from "@components/Interviews";
+import Slider450 from "@components/Slider450";
+import Spin250 from "@components/Spin250";
+import Spin450 from "@components/Spin450";
+import Videos from "@components/Videos";
 import React, { useState } from "react";
 import { Helmet } from "react-helmet";
 import "react-modal-video/css/modal-video.min.css";
-import Footer from "../components/Footer";
-import Gallery250 from "../components/Gallery250";
-import Gallery450 from "../components/Gallery450";
-import Interviews from "../components/Interviews";
-import Slider450 from "../components/Slider450";
-import Spin250 from "../components/Spin250";
-import Spin450 from "../components/Spin450";
-import Videos from "../components/Videos";
 
 const IndexPage = () => {
   const [mostrarComponente, setMostrarComponente] = useState(true);
@@ -69,6 +70,7 @@ const IndexPage = () => {
       <Videos />
       <Slider450 />
       <Interviews />
+      <ContactForm />
       <Footer />
     </main>
   );
