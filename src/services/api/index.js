@@ -1,5 +1,5 @@
 /* const API = 'https://desarrolloktm.curbe.com.ec'; */
-const API = "https://ktm.curbe.com.ec";
+const API = "https://desarrollohonda.curbe.com.ec";
 
 const endPoints = {
   auth: {
@@ -7,6 +7,12 @@ const endPoints = {
   },
   cities: {
     getCities: `${API}/api/shared/get_cities`,
+  },
+  paymentMethods: {
+    getPaymentMethods: `${API}/api/shared/get_payment_methods_by_brand`,
+  },
+  products: {
+    getProducts: `${API}/api/products/get_productos`,
   },
   productTypes: {
     getProductTypes: `${API}/api/shared/getProductTypesByBrand`,
@@ -28,9 +34,6 @@ const endPoints = {
   },
   agencies: {
     getAgencies: `${API}/api/shared/get_agencies`,
-  },
-  products: {
-    getProducts: `${API}/api/products/get_productos`,
   },
   media: {
     getMedia: `${API}/api/leads_web/get_media`,

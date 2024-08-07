@@ -1,7 +1,8 @@
-import { SAVE_LEAD } from "@constants";
+import { REQUEST_AGENCIES, SAVE_LEAD } from "@constants";
 import endPoints from "@services/api";
 import { authenticate, fetchData } from "@services/api/utils";
 import axios from "axios";
+import "bootstrap/dist/css/bootstrap.min.css";
 import React, { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
@@ -25,17 +26,20 @@ function ContactForm() {
   // const [tipoProductoSeleccionado, setTipoProductoSeleccionado] = useState("");
   // const [isLoading, setLoading] = useState(false);
   const [ciudades, setCiudades] = useState([]);
-  const [formasPago, setFormaPago] = useState([]);
-  // const [agencias, setAgencias] = useState([]);
-  const [selectedTipoProductoNombre, setSelectedTipoProductoNombre] =
+  const [metodosPago, setMetodosPago] = useState([]);
+  const [agencias, setAgencias] = useState([]);
+  const [selectedTiempoCompra, setSelectedTiempoCompra] = useState("");
+  const [selectedTiempoCompraNombre, setSelectedTiempoCompraNombre] =
     useState("");
   // const [categorias, setCategorias] = useState([]);
-  // const [productos, setProductos] = useState([]);
+  const [productos, setProductos] = useState([]);
+  const [tiemposCompra, setTiemposCompra] = useState([]);
   // const [tipoMensaje, setTipoMensaje] = useState("");
   // const [mensaje, setMensaje] = useState("");
   // const [open, setOpen] = useState(false);
-  const [ciudadSeleccionada, setCiudadSeleccionada] = useState(null);
-  // const [selectedProducto, setSelectedProducto] = useState("");
+  const [selectedAgencia, setSelectedAgencia] = useState(null);
+  const [selectedCiudad, setSelectedCiudad] = useState(null);
+  const [selectedProducto, setSelectedProducto] = useState("");
   const [selectedFormaPago, setSelectedFormaPago] = useState("");
   const [selectedFormaPagoNombre, setSelectedFormaPagoNombre] = useState("");
   const [token, setToken] = useState("");
@@ -44,22 +48,22 @@ function ContactForm() {
   //   setOpen(false);
   // };
 
-  // const getCities = async (ciudadCodigo) => {
-  //   const options = await authenticate();
-  //   if (options) {
-  //     const responseAgencias = await axios.post(
-  //       endPoints.agencies.getAgencies,
-  //       {
-  //         marca: REQUEST_AGENCIES.marca,
-  //         codempresa: REQUEST_AGENCIES.codempresa,
-  //         codciudad: ciudadCodigo,
-  //         estado: REQUEST_AGENCIES.estado,
-  //       },
-  //       options
-  //     );
-  //     // setAgencias(responseAgencias.data);
-  //   }
-  // };
+  const getCities = async (ciudadCodigo) => {
+    const options = await authenticate();
+    if (options) {
+      const responseAgencias = await axios.post(
+        endPoints.agencies.getAgencies,
+        {
+          marca: REQUEST_AGENCIES.marca,
+          codempresa: REQUEST_AGENCIES.codempresa,
+          codciudad: ciudadCodigo,
+          estado: REQUEST_AGENCIES.estado,
+        },
+        options
+      );
+      setAgencias(responseAgencias.data);
+    }
+  };
 
   const handleChangeCelular = (e) => {
     const re = /^[0-9\b]+$/; // reglas
@@ -107,9 +111,12 @@ function ContactForm() {
       const options = await authenticate();
       if (options) {
         try {
-          const { ciudades, formasPago } = await fetchData(options);
+          const { ciudades, productos, tiemposCompra } =
+            await fetchData(options);
           setCiudades(ciudades);
-          setFormaPago(formasPago);
+          setProductos(productos);
+          setTiemposCompra(tiemposCompra);
+          // setMetodosPago(metodosPago);
         } catch (error) {
           console.error("Error al obtener datos", error);
         }
@@ -124,6 +131,8 @@ function ContactForm() {
 
     getData();
   }, []);
+
+  console.log(productos);
 
   const onSubmit = async (data) => {
     // setLoading(true);
@@ -156,7 +165,7 @@ function ContactForm() {
           cod_medio_contacto: 1,
           cod_rango_ingresos: 3,
           service_type_code: data.tipoProducto,
-          service_type_name: selectedTipoProductoNombre,
+          // service_type_name: selectedTipoProductoNombre,
         };
 
         if (data.tipoProducto !== 1) {
@@ -174,7 +183,7 @@ function ContactForm() {
         reset();
         // setSelectedAgencia("");
         // setTipoProductoSeleccionado("");
-        setSelectedTipoProductoNombre("");
+        // setSelectedTipoProductoNombre("");
         setSelectedFormaPago("");
         setSelectedFormaPagoNombre("");
         // setCategoriaSeleccionada("");
@@ -193,10 +202,8 @@ function ContactForm() {
     }
   };
 
-  console.log(ciudadSeleccionada, selectedFormaPago);
-
   return (
-    <Container className="mt-4 mt-md-5">
+    <Container>
       <Row>
         <Col md={12}>
           <Form
@@ -328,42 +335,7 @@ function ContactForm() {
                 {errors.telefono && <p>{errors.telefono.message}</p>}
               </Col>
               <Col md={6}>
-                <FloatingLabel label="Forma de pago">
-                  <Controller
-                    name="formasPago"
-                    control={control}
-                    defaultValue=""
-                    rules={{ required: "La forma de pago es requerida" }}
-                    render={({ field }) => (
-                      <Form.Select
-                        label="Ciudad"
-                        id="ciudad"
-                        color="warning"
-                        {...field}
-                        onChange={(e) => {
-                          setCiudadSeleccionada(e.target.value);
-                          // setSelectedAgencia("");
-                          // getCities(e.target.value);
-                          field.onChange(e);
-                        }}
-                      >
-                        <option value="">- Seleccione -</option>
-                        {formasPago?.map((formaPago) => (
-                          <option
-                            key={formaPago.fpam_id}
-                            value={formaPago.fpam_id}
-                          >
-                            {formaPago.gtc_codigo}
-                          </option>
-                        ))}
-                      </Form.Select>
-                    )}
-                  />
-                </FloatingLabel>
-                {errors.formasPago && <p>{errors.formasPago.message}</p>}
-              </Col>
-              <Col md={6}>
-                <FloatingLabel label="Ciudad en la que desea ser atendido">
+                <FloatingLabel label="Ciudad">
                   <Controller
                     name="ciudad"
                     control={control}
@@ -376,19 +348,56 @@ function ContactForm() {
                         color="warning"
                         {...field}
                         onChange={(e) => {
-                          setCiudadSeleccionada(e.target.value);
-                          // setSelectedAgencia("");
-                          // getCities(e.target.value);
+                          setSelectedCiudad(e.target.value);
+                          setSelectedAgencia("");
+                          getCities(e.target.value);
                           field.onChange(e);
                         }}
                       >
                         <option value="">- Seleccione -</option>
                         {ciudades?.map((ciudad) => (
                           <option
-                            key={ciudad.ciudad_codigo}
+                            key={ciudad.alm_codigo}
                             value={ciudad.ciudad_codigo}
                           >
                             {ciudad.ciudad_nombre}
+                          </option>
+                        ))}
+                      </Form.Select>
+                    )}
+                  />
+                </FloatingLabel>
+                {errors.ciudad && <p>{errors.ciudad.message}</p>}
+              </Col>
+              <Col md={6}>
+                <FloatingLabel label="Agencia">
+                  <Controller
+                    name="ciudad"
+                    control={control}
+                    defaultValue=""
+                    rules={{ required: "La agencia es requerida" }}
+                    render={({ field }) => (
+                      <Form.Select
+                        label="Ciudad"
+                        id="ciudad"
+                        color="warning"
+                        {...field}
+                        value={selectedAgencia}
+                        disabled={
+                          !selectedCiudad
+                        } /* helperText={!ciudadSeleccionada ? 'Selecciona una ciudad primero' : ''} */
+                        onChange={(e) => {
+                          field.onChange(e);
+                          setSelectedAgencia(e.target.value);
+                        }}
+                      >
+                        <option value="">- Seleccione -</option>
+                        {agencias?.map((agencia) => (
+                          <option
+                            key={agencia.alm_codigo}
+                            value={agencia.agencia_codigo}
+                          >
+                            {agencia.alm_nombre}
                           </option>
                         ))}
                       </Form.Select>
@@ -405,10 +414,69 @@ function ContactForm() {
                     defaultValue=""
                     rules={{ required: "El modelo es requerido" }}
                     render={({ field }) => (
-                      <Form.Select {...field}>
+                      <Form.Select
+                        label="Modelo"
+                        id="modelo"
+                        color="warning"
+                        {...field}
+                        onChange={(e) => {
+                          setSelectedProducto(e.target.value);
+                          // setSelectedAgencia("");
+                          // getCities(e.target.value);
+                          field.onChange(e);
+                        }}
+                      >
                         <option value="">- Seleccione -</option>
-                        <option value="CT 100">CRF250R</option>
-                        <option value="CT 100">CRF450R</option>
+                        {productos?.map((producto) => (
+                          <option
+                            key={producto.codigo_producto}
+                            value={producto.codigo_producto}
+                          >
+                            {producto.ciudad_nombre}
+                          </option>
+                        ))}
+                      </Form.Select>
+                    )}
+                  />
+                </FloatingLabel>
+                {errors.modelo && <p>{errors.modelo.message}</p>}
+              </Col>
+              <Col md={6}>
+                <FloatingLabel label="Tiempo estimado de compra">
+                  <Controller
+                    name="tiempoCompra"
+                    control={control}
+                    defaultValue=""
+                    rules={{
+                      required: "El tiempo estimado de compra es requerido",
+                    }}
+                    render={({ field }) => (
+                      <Form.Select
+                        label="Tiempo de compra"
+                        id="tiempoCompra"
+                        color="warning"
+                        {...field}
+                        value={selectedTiempoCompra}
+                        onChange={(e) => {
+                          field.onChange(e);
+                          const selectedOption = tiemposCompra.find(
+                            (option) => option.gtc_codigo === e.target.value
+                          );
+                          setSelectedTiempoCompra(e.target.value);
+                          setSelectedTiempoCompraNombre(
+                            selectedOption ? selectedOption.gtc_nombre : ""
+                          );
+                        }}
+                      >
+                        <option value="">- Seleccione -</option>
+                        {productos?.map((producto) => (
+                          <option
+                            key={producto.codigo_producto}
+                            value={producto.codigo_producto}
+                          >
+                            {producto.ciudad_nombre}
+                          </option>
+                        ))}
                       </Form.Select>
                     )}
                   />

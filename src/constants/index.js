@@ -1,18 +1,22 @@
 export const REQUEST_LOGIN = Object.freeze({
-  lgn_userName: "api_leads_prod_ktm",
-  lgn_password: "@ktm2023",
-  lgn_dominio: "racingmoto",
-});
-
-export const REQUEST_PRODUCTS = Object.freeze({
-  marca: 700,
-  codempresa: 901,
-  estado: 0,
+  lgn_userName: "usrdev_honda",
+  lgn_password: "@honda2024",
+  lgn_dominio: "desarrollohonda",
 });
 
 export const REQUEST_CITIES = Object.freeze({
-  marca: 700,
-  codempresa: 901,
+  marca: 800,
+  codempresa: 1001,
+  estado: 0,
+});
+
+export const REQUEST_PAYMENT_METHODS = Object.freeze({
+  brandcode: 800,
+});
+
+export const REQUEST_PRODUCTS = Object.freeze({
+  marca: 800,
+  codempresa: 1010,
   estado: 0,
 });
 

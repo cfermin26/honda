@@ -1,26 +1,18 @@
 import ContactForm from "@components/ContactForm";
-import Footer from "@components/Footer";
-import Gallery250 from "@components/Gallery250";
-import Gallery450 from "@components/Gallery450";
-import Interviews from "@components/Interviews";
-import Slider450 from "@components/Slider450";
-import Spin250 from "@components/Spin250";
-import Spin450 from "@components/Spin450";
-import Videos from "@components/Videos";
-import React, { useState } from "react";
+import React from "react";
 import { Helmet } from "react-helmet";
 import "react-modal-video/css/modal-video.min.css";
 
 const IndexPage = () => {
-  const [mostrarComponente, setMostrarComponente] = useState(true);
-  const handleClick = (componente) => {
-    setMostrarComponente(componente);
-  };
+  // const [mostrarComponente, setMostrarComponente] = useState(true);
+  // const handleClick = (componente) => {
+  //   setMostrarComponente(componente);
+  // };
 
   return (
     <main>
       <Helmet>
-        <title>{mostrarComponente ? "Honda CRF450R" : "Honda CRF250R"}</title>
+        {/* <title>{mostrarComponente ? "Honda CRF450R" : "Honda CRF250R"}</title> */}
         <meta
           name="description"
           content="Descubre la nueva CRF450R, la máquina MX completa con control total para el piloto. Rediseño de ruedas liderado por HRC y arranque eléctrico de serie."
@@ -59,7 +51,7 @@ const IndexPage = () => {
         ></script>
       </Helmet>
 
-      {mostrarComponente ? (
+      {/* {mostrarComponente ? (
         <Spin450 onSwitch={handleClick} />
       ) : (
         <Spin250 onSwitch={handleClick} />
@@ -70,8 +62,8 @@ const IndexPage = () => {
       <Videos />
       <Slider450 />
       <Interviews />
+      <Footer /> */}
       <ContactForm />
-      <Footer />
     </main>
   );
 };

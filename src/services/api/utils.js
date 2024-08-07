@@ -1,4 +1,4 @@
-import { REQUEST_CITIES, REQUEST_LOGIN } from "@constants";
+import { REQUEST_CITIES, REQUEST_LOGIN, REQUEST_PRODUCTS } from "@constants";
 import endPoints from "@services/api";
 import axios from "axios";
 
@@ -26,15 +26,23 @@ export const authenticate = async () => {
 
 export const fetchData = async (options) => {
   try {
-    const [ciudadesResponse, formasPagoResponse] = await Promise.all([
-      axios.post(endPoints.cities.getCities, REQUEST_CITIES, options),
-      axios.get(endPoints.purchaseTime.getPurchaseTime, options),
-    ]);
+    const [ciudadesResponse, productsResponse, tiemposCompraResponse] =
+      await Promise.all([
+        axios.post(endPoints.cities.getCities, REQUEST_CITIES, options),
+        axios.post(endPoints.products.getProducts, REQUEST_PRODUCTS, options),
+        axios.get(endPoints.purchaseTime.getPurchaseTime, options),
+        // axios.post(
+        //   endPoints.paymentMethods.getPaymentMethods,
+        //   REQUEST_PAYMENT_METHODS,
+        //   options
+        // ),
+      ]);
 
     const ciudades = ciudadesResponse.data;
-    const formasPago = formasPagoResponse.data.data;
+    const productos = productsResponse.data.data;
+    // const metodosPago = metodosPagoResponse.data.data;
 
-    return { ciudades, formasPago };
+    return { ciudades, productos };
   } catch (error) {
     console.error("Error al obtener datos:", error);
     return null;
