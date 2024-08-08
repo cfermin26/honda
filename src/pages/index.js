@@ -70,7 +70,7 @@ const IndexPage = () => {
 
       <Videos />
       {mostrarComponente ? <Slider450 /> : <Slider250 />}
-      {/* <Slider450 /> */}
+
       <Interviews />
       <ContactForm />
       <Footer />
