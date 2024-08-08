@@ -135,11 +135,9 @@ function ContactForm() {
         const requestData = {
           tipo_integracion: 0,
           codciudad: selectedCiudad.ciudad_codigo,
-          empresa: selectedCiudad.emp_codigo,
-          almacen: selectedCiudad.alm_codigo,
           plataforma: "web",
           canal: 48,
-          medio: 206,
+          medio: 219,
           calidad: 3,
           cedula: data.cedula,
           nombre: data.nombre,
@@ -149,12 +147,10 @@ function ContactForm() {
           telefono: data.telefono,
           token: token,
           tipo_vehiculo: 27,
-          codproducto: data.producto,
-          tiempo_compra: data.tiemposCompra,
+          codproducto: parseInt(data.producto),
+          tiempo_compra: parseInt(data.tiempoCompra),
           tiempo_compra_nombre: selectedTiempoCompraNombre,
           aceptacion: 1,
-          forma_pago_dato: "Contado",
-          cod_forma_pago: 5,
         };
 
         await axios.post(endPoints.lead.createLead, requestData, options);
