@@ -59,7 +59,7 @@ body {
 }
 
 .contact-form {
-  max-width: 800px;
+  max-width: 700px;
 }
 
 .contact-form p {
@@ -70,7 +70,17 @@ body {
   margin-bottom: 0;
 }
 
-.terminos label {
+.legal label {
+  color: #ffffff;
+  font-family: Bourgeois-Medium;
+  font-size: 16px;
+  letter-spacing: 1px;
+  line-height: 1;
+}
+
+.legal button {
+  background-color: #4c4c4c;
+  border: none;
   color: #ffffff;
   font-family: Bourgeois-Medium;
   font-size: 18px;
@@ -94,7 +104,7 @@ body {
 }
 
 .btn-left {
-  left: 10px;
+  left: -12px;
   margin-top: -22%;
   top: 6px;
   transition: ease 0.3s;
@@ -107,7 +117,7 @@ body {
 
 .btn-right {
   margin-top: -22%;
-  right: 10px;
+  right: -12px;
   top: 6px;
 }
 

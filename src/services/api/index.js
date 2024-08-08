@@ -14,6 +14,9 @@ const endPoints = {
   products: {
     getProducts: `${API}/api/products/get_productos`,
   },
+  purchaseTime: {
+    getPurchaseTime: `${API}/api/shared/get_purchase_times/800/0`,
+  },
   productTypes: {
     getProductTypes: `${API}/api/shared/getProductTypesByBrand`,
   },
@@ -38,9 +41,7 @@ const endPoints = {
   media: {
     getMedia: `${API}/api/leads_web/get_media`,
   },
-  purchaseTime: {
-    getPurchaseTime: `${API}/api/shared/get_purchase_times/700/0`,
-  },
+
   lead: {
     createLead: `${API}/api/leads_web/new_lead`,
   },

@@ -21,17 +21,16 @@ export const REQUEST_PRODUCTS = Object.freeze({
 });
 
 export const REQUEST_AGENCIES = Object.freeze({
-  marca: 700,
-  codempresa: 901,
+  marca: 800,
+  codempresa: 1001,
   estado: 0,
 });
 
 export const SAVE_LEAD = Object.freeze({
-  codempresa: 901,
+  codempresa: 1001,
 });
 
 export const MESSAGES = Object.freeze({
-  codempresa: 901,
   success: "Gracias por registrar tus datos",
   error: "Ocurrió un error. Intente en unos minutos",
 });

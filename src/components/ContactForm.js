@@ -1,8 +1,8 @@
-import { REQUEST_AGENCIES, SAVE_LEAD } from "@constants";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import endPoints from "@services/api";
 import { authenticate, fetchData } from "@services/api/utils";
 import axios from "axios";
-import "bootstrap/dist/css/bootstrap.min.css";
 import React, { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
@@ -11,6 +11,7 @@ import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import { Controller, useForm } from "react-hook-form";
+import Swal from "sweetalert2";
 
 const queryString = require("query-string");
 
@@ -23,47 +24,29 @@ function ContactForm() {
     setValue,
   } = useForm({ mode: "onBlur" });
 
-  // const [tipoProductoSeleccionado, setTipoProductoSeleccionado] = useState("");
-  // const [isLoading, setLoading] = useState(false);
+  const Toast = Swal.mixin({
+    toast: true,
+    position: "top-end",
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.addEventListener("mouseenter", Swal.stopTimer);
+      toast.addEventListener("mouseleave", Swal.resumeTimer);
+    },
+  });
+
+  const [isLoading, setLoading] = useState(false);
+  // eslint-disable-next-line
   const [ciudades, setCiudades] = useState([]);
-  const [metodosPago, setMetodosPago] = useState([]);
-  const [agencias, setAgencias] = useState([]);
+  const [selectedProducto, setSelectedProducto] = useState("");
+  const [cities, setCities] = useState([]);
+  const [selectedCiudad, setSelectedCiudad] = useState(null);
+  const [tiemposCompra, setTiemposCompra] = useState([]);
   const [selectedTiempoCompra, setSelectedTiempoCompra] = useState("");
   const [selectedTiempoCompraNombre, setSelectedTiempoCompraNombre] =
     useState("");
-  // const [categorias, setCategorias] = useState([]);
-  const [productos, setProductos] = useState([]);
-  const [tiemposCompra, setTiemposCompra] = useState([]);
-  // const [tipoMensaje, setTipoMensaje] = useState("");
-  // const [mensaje, setMensaje] = useState("");
-  // const [open, setOpen] = useState(false);
-  const [selectedAgencia, setSelectedAgencia] = useState(null);
-  const [selectedCiudad, setSelectedCiudad] = useState(null);
-  const [selectedProducto, setSelectedProducto] = useState("");
-  const [selectedFormaPago, setSelectedFormaPago] = useState("");
-  const [selectedFormaPagoNombre, setSelectedFormaPagoNombre] = useState("");
   const [token, setToken] = useState("");
-
-  // const handleClose = () => {
-  //   setOpen(false);
-  // };
-
-  const getCities = async (ciudadCodigo) => {
-    const options = await authenticate();
-    if (options) {
-      const responseAgencias = await axios.post(
-        endPoints.agencies.getAgencies,
-        {
-          marca: REQUEST_AGENCIES.marca,
-          codempresa: REQUEST_AGENCIES.codempresa,
-          codciudad: ciudadCodigo,
-          estado: REQUEST_AGENCIES.estado,
-        },
-        options
-      );
-      setAgencias(responseAgencias.data);
-    }
-  };
 
   const handleChangeCelular = (e) => {
     const re = /^[0-9\b]+$/; // reglas
@@ -106,17 +89,23 @@ function ContactForm() {
   };
 
   useEffect(() => {
-    // setMostrarCamposExtras(tipoProductoSeleccionado === 1);
     const getData = async () => {
       const options = await authenticate();
       if (options) {
         try {
-          const { ciudades, productos, tiemposCompra } =
-            await fetchData(options);
+          const { ciudades, tiemposCompra } = await fetchData(options);
           setCiudades(ciudades);
-          setProductos(productos);
           setTiemposCompra(tiemposCompra);
-          // setMetodosPago(metodosPago);
+          const uniqueCities = [
+            ...new Map(
+              ciudades.map((item) => [item.ciudad_codigo, item])
+            ).values(),
+          ];
+
+          uniqueCities.sort((a, b) =>
+            a.ciudad_nombre.localeCompare(b.ciudad_nombre)
+          );
+          setCities(uniqueCities);
         } catch (error) {
           console.error("Error al obtener datos", error);
         }
@@ -132,68 +121,69 @@ function ContactForm() {
     getData();
   }, []);
 
-  console.log(productos);
+  if (selectedCiudad) {
+    // eslint-disable-next-line
+    const { emp_codigo, alm_codigo, ciudad_codigo } = selectedCiudad;
+  }
 
   const onSubmit = async (data) => {
-    // setLoading(true);
+    setLoading(true);
 
     const options = await authenticate();
     if (options) {
       try {
-        // Objeto base con campos comunes
         const requestData = {
           tipo_integracion: 0,
-          empresa: SAVE_LEAD.codempresa,
-          almacen: data.agencia,
+          codciudad: selectedCiudad.ciudad_codigo,
+          empresa: selectedCiudad.emp_codigo,
+          almacen: selectedCiudad.alm_codigo,
           plataforma: "web",
-          canal: 46,
-          medio: 188,
+          canal: 48,
+          medio: 206,
           calidad: 3,
           cedula: data.cedula,
           nombre: data.nombre,
           apellido: data.apellido,
           email: data.email,
-          direccion: data.direccion,
-          telefono: data.celular,
-          exonerado: 0,
+          direccion: "",
+          telefono: data.telefono,
           token: token,
-          tipo_vehiculo: 8,
+          tipo_vehiculo: 27,
           codproducto: data.producto,
-          tiempo_compra: data.tiempoCompra,
-          tiempo_compra_nombre: selectedFormaPagoNombre,
+          tiempo_compra: data.tiemposCompra,
+          tiempo_compra_nombre: selectedTiempoCompraNombre,
           aceptacion: 1,
-          cod_medio_contacto: 1,
-          cod_rango_ingresos: 3,
-          service_type_code: data.tipoProducto,
-          // service_type_name: selectedTipoProductoNombre,
+          forma_pago_dato: "Contado",
+          cod_forma_pago: 5,
         };
-
-        if (data.tipoProducto !== 1) {
-          delete requestData.codproducto;
-          delete requestData.tiempo_compra;
-          delete requestData.tiempo_compra_nombre;
-        }
 
         await axios.post(endPoints.lead.createLead, requestData, options);
 
-        // setLoading(false);
-        // setOpen(true);
-        // setTipoMensaje("success");
-        // setMensaje(MESSAGES.success);
+        Toast.fire({
+          icon: "success",
+          title: "Gracias por registrar tus datos",
+        });
+
+        setLoading(false);
         reset();
-        // setSelectedAgencia("");
-        // setTipoProductoSeleccionado("");
-        // setSelectedTipoProductoNombre("");
-        setSelectedFormaPago("");
-        setSelectedFormaPagoNombre("");
-        // setCategoriaSeleccionada("");
-        // setSelectedProducto("");
+        setSelectedProducto("");
+        setSelectedTiempoCompra("");
       } catch (error) {
-        // setOpen(true);
-        // setTipoMensaje("error");
-        // setMensaje(MESSAGES.error);
+        Toast.fire({
+          icon: "error",
+          title: "Error al enviar la información",
+        });
       }
     }
+  };
+
+  const handleCityChange = (event) => {
+    const ciudad_codigo = event.target.value;
+    const city = cities.find(
+      (city) => city.ciudad_codigo === parseInt(ciudad_codigo)
+    );
+    setSelectedCiudad(city);
+    setValue("ciudad", ciudad_codigo);
   };
 
   const validateCedula = (value) => {
@@ -204,6 +194,13 @@ function ContactForm() {
 
   return (
     <Container>
+      <Row>
+        <Col md={12}>
+          <h2 className="text-uppercase text-center mt-5 mb-4 mt-md-5 mb-md-4 subtitle-bold ">
+            Cotización
+          </h2>
+        </Col>
+      </Row>
       <Row>
         <Col md={12}>
           <Form
@@ -324,6 +321,7 @@ function ContactForm() {
                         type="text"
                         placeholder="Telefono"
                         {...field}
+                        maxLength={10}
                         onChange={(e) => {
                           field.onChange(e);
                           handleChangeCelular(e);
@@ -347,15 +345,10 @@ function ContactForm() {
                         id="ciudad"
                         color="warning"
                         {...field}
-                        onChange={(e) => {
-                          setSelectedCiudad(e.target.value);
-                          setSelectedAgencia("");
-                          getCities(e.target.value);
-                          field.onChange(e);
-                        }}
+                        onChange={handleCityChange}
                       >
                         <option value="">- Seleccione -</option>
-                        {ciudades?.map((ciudad) => (
+                        {cities?.map((ciudad) => (
                           <option
                             key={ciudad.alm_codigo}
                             value={ciudad.ciudad_codigo}
@@ -370,76 +363,32 @@ function ContactForm() {
                 {errors.ciudad && <p>{errors.ciudad.message}</p>}
               </Col>
               <Col md={6}>
-                <FloatingLabel label="Agencia">
+                <FloatingLabel label="Modelo">
                   <Controller
-                    name="ciudad"
-                    control={control}
-                    defaultValue=""
-                    rules={{ required: "La agencia es requerida" }}
-                    render={({ field }) => (
-                      <Form.Select
-                        label="Ciudad"
-                        id="ciudad"
-                        color="warning"
-                        {...field}
-                        value={selectedAgencia}
-                        disabled={
-                          !selectedCiudad
-                        } /* helperText={!ciudadSeleccionada ? 'Selecciona una ciudad primero' : ''} */
-                        onChange={(e) => {
-                          field.onChange(e);
-                          setSelectedAgencia(e.target.value);
-                        }}
-                      >
-                        <option value="">- Seleccione -</option>
-                        {agencias?.map((agencia) => (
-                          <option
-                            key={agencia.alm_codigo}
-                            value={agencia.agencia_codigo}
-                          >
-                            {agencia.alm_nombre}
-                          </option>
-                        ))}
-                      </Form.Select>
-                    )}
-                  />
-                </FloatingLabel>
-                {errors.ciudad && <p>{errors.ciudad.message}</p>}
-              </Col>
-              <Col md={6}>
-                <FloatingLabel label="Modelo de la moto">
-                  <Controller
-                    name="modelo"
+                    name="producto"
                     control={control}
                     defaultValue=""
                     rules={{ required: "El modelo es requerido" }}
                     render={({ field }) => (
                       <Form.Select
                         label="Modelo"
-                        id="modelo"
+                        id="producto"
                         color="warning"
                         {...field}
+                        value={selectedProducto}
                         onChange={(e) => {
                           setSelectedProducto(e.target.value);
-                          // setSelectedAgencia("");
-                          // getCities(e.target.value);
                           field.onChange(e);
                         }}
                       >
                         <option value="">- Seleccione -</option>
-                        {productos?.map((producto) => (
-                          <option
-                            key={producto.codigo_producto}
-                            value={producto.codigo_producto}
-                          >
-                            {producto.ciudad_nombre}
-                          </option>
-                        ))}
+                        <option value="2146">CRF250R</option>
+                        <option value="2148">CRF450R</option>
                       </Form.Select>
                     )}
                   />
                 </FloatingLabel>
-                {errors.modelo && <p>{errors.modelo.message}</p>}
+                {errors.producto && <p>{errors.producto.message}</p>}
               </Col>
               <Col md={6}>
                 <FloatingLabel label="Tiempo estimado de compra">
@@ -458,33 +407,35 @@ function ContactForm() {
                         {...field}
                         value={selectedTiempoCompra}
                         onChange={(e) => {
-                          field.onChange(e);
+                          const selectedValue = e.target.value;
                           const selectedOption = tiemposCompra.find(
-                            (option) => option.gtc_codigo === e.target.value
+                            (option) =>
+                              option.gtc_codigo === parseInt(selectedValue, 10)
                           );
-                          setSelectedTiempoCompra(e.target.value);
+                          setSelectedTiempoCompra(selectedValue);
                           setSelectedTiempoCompraNombre(
                             selectedOption ? selectedOption.gtc_nombre : ""
                           );
+                          field.onChange(e);
                         }}
                       >
                         <option value="">- Seleccione -</option>
-                        {productos?.map((producto) => (
+                        {tiemposCompra?.map((tiempoCompra) => (
                           <option
-                            key={producto.codigo_producto}
-                            value={producto.codigo_producto}
+                            key={tiempoCompra.gtc_codigo}
+                            value={tiempoCompra.gtc_codigo}
                           >
-                            {producto.ciudad_nombre}
+                            {tiempoCompra.gtc_nombre}
                           </option>
                         ))}
                       </Form.Select>
                     )}
                   />
                 </FloatingLabel>
-                {errors.modelo && <p>{errors.modelo.message}</p>}
+                {errors.tiempoCompra && <p>{errors.tiempoCompra.message}</p>}
               </Col>
-              {/* <Col md={6}>
-                <Form.Group className="terminos">
+              <Col md={12} className="text-center legal">
+                <Form.Group className="d-flex justify-content-center">
                   <Controller
                     name="terms"
                     control={control}
@@ -495,40 +446,32 @@ function ContactForm() {
                     render={({ field }) => (
                       <Form.Check
                         type="checkbox"
-                        label="Acepto términos y condiciones"
+                        label="Acepto los términos y condiciones"
+                        id="terms"
                         {...field}
+                        isInvalid={!!errors.terms}
                       />
                     )}
                   />
                 </Form.Group>
-              </Col> */}
-              <Col md={6} className="text-center">
-                {/* <Form.Group className="d-flex justify-content-center">
-                  <Controller
-                    name="terms"
-                    control={control}
-                    defaultValue={false}
-                    rules={{
-                      required: "Debes aceptar los términos y condiciones",
-                    }}
-                    render={({ field }) => (
-                      <Form.Check
-                        type="checkbox"
-                        label="Acepto términos y condiciones"
-                        {...field}
-                      />
-                    )}
-                  />
-                </Form.Group> */}
                 {errors.terms && <p>{errors.terms.message}</p>}
-                <div className="d-grid">
-                  <Button
-                    type="submit"
-                    className="btn-light btn-lg btn-send px-5"
-                  >
-                    Enviar
-                  </Button>
-                </div>
+                <Form.Group className="mt-3">
+                  {!isLoading && (
+                    <Button type="submit" className="btn-light btn-send px-5">
+                      Enviar
+                    </Button>
+                  )}
+                  {isLoading && (
+                    <Button
+                      type="submit"
+                      className="btn-light btn-send px-5"
+                      disabled
+                    >
+                      <FontAwesomeIcon icon={faSpinner} className="fa-spin" />{" "}
+                      Enviando...
+                    </Button>
+                  )}
+                </Form.Group>
               </Col>
             </Row>
           </Form>
