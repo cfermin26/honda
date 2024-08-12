@@ -1,4 +1,3 @@
-import { StaticImage } from "gatsby-plugin-image";
 import React, { useState } from "react";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
@@ -31,19 +30,47 @@ function Interviews() {
             navigation={true}
             pagination={{ clickable: true }}
             loop={true}
-            slidesPerView={5}
+            slidesPerView={2}
           >
             <SwiperSlide>
-              <div onClick={() => setOpen(true)} aria-hidden="true">
+              <div className="video-container">
+                <iframe
+                  src="https://www.youtube.com/embed/oPgW1FRtQIY"
+                  title="YouTube video player"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                ></iframe>
+              </div>
+              {/* <div onClick={() => setOpen(true)} aria-hidden="true">
                 <StaticImage
                   src="../images/assets/cover1.jpg"
                   alt="honda entrevista"
                   layout="fullWidth"
                   role="button"
                 />
-              </div>
+              </div> */}
             </SwiperSlide>
             <SwiperSlide>
+              <div className="video-container">
+                <iframe
+                  src="https://www.youtube.com/embed/zjUPfrrN630"
+                  title="YouTube video player"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                ></iframe>
+              </div>
+              {/* <div onClick={() => setOpen(true)} aria-hidden="true">
+                <StaticImage
+                  src="../images/assets/cover1.jpg"
+                  alt="honda entrevista"
+                  layout="fullWidth"
+                  role="button"
+                />
+              </div> */}
+            </SwiperSlide>
+            {/* <SwiperSlide>
               <div onClick={() => setOpen2(true)} aria-hidden="true">
                 <StaticImage
                   src="../images/assets/cover2.jpg"
@@ -82,7 +109,7 @@ function Interviews() {
                   role="button"
                 />
               </div>
-            </SwiperSlide>
+            </SwiperSlide> */}
           </Swiper>
         </Col>
       </Row>
