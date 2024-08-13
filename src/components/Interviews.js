@@ -12,6 +12,7 @@ function Interviews() {
   const [isOpen3, setOpen3] = useState(false);
   const [isOpen4, setOpen4] = useState(false);
   const [isOpen5, setOpen5] = useState(false);
+  const [isOpen6, setOpen6] = useState(false);
 
   return (
     <Container>
@@ -33,44 +34,27 @@ function Interviews() {
             slidesPerView={2}
           >
             <SwiperSlide>
-              <div className="video-container">
-                <iframe
-                  src="https://www.youtube.com/embed/oPgW1FRtQIY"
-                  title="YouTube video player"
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                ></iframe>
-              </div>
-              {/* <div onClick={() => setOpen(true)} aria-hidden="true">
+              <div className="video-container"></div>
+              <div onClick={() => setOpen(true)} aria-hidden="true">
                 <StaticImage
                   src="../images/assets/cover1.jpg"
                   alt="honda entrevista"
                   layout="fullWidth"
                   role="button"
                 />
-              </div> */}
+              </div>
             </SwiperSlide>
             <SwiperSlide>
-              <div className="video-container">
-                <iframe
-                  src="https://www.youtube.com/embed/zjUPfrrN630"
-                  title="YouTube video player"
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                ></iframe>
-              </div>
-              {/* <div onClick={() => setOpen(true)} aria-hidden="true">
+              <div onClick={() => setOpen(true)} aria-hidden="true">
                 <StaticImage
                   src="../images/assets/cover1.jpg"
                   alt="honda entrevista"
                   layout="fullWidth"
                   role="button"
                 />
-              </div> */}
+              </div>
             </SwiperSlide>
-            {/* <SwiperSlide>
+            <SwiperSlide>
               <div onClick={() => setOpen2(true)} aria-hidden="true">
                 <StaticImage
                   src="../images/assets/cover2.jpg"
@@ -109,7 +93,17 @@ function Interviews() {
                   role="button"
                 />
               </div>
-            </SwiperSlide> */}
+            </SwiperSlide>
+            <SwiperSlide>
+              <div onClick={() => setOpen6(true)} aria-hidden="true">
+                <StaticImage
+                  src="../images/assets/cover5.jpg"
+                  alt="honda entrevista"
+                  layout="fullWidth"
+                  role="button"
+                />
+              </div>
+            </SwiperSlide>
           </Swiper>
         </Col>
       </Row>
@@ -119,35 +113,42 @@ function Interviews() {
             channel="youtube"
             autoplay
             isOpen={isOpen}
-            videoId="zjUPfrrN630"
+            videoId="oPgW1FRtQIY"
             onClose={() => setOpen(false)}
           />
           <ModalVideo
             channel="youtube"
             autoplay
             isOpen={isOpen2}
-            videoId="oPgW1FRtQIY"
+            videoId="zjUPfrrN630"
             onClose={() => setOpen2(false)}
           />
           <ModalVideo
             channel="youtube"
             autoplay
             isOpen={isOpen3}
-            videoId="oPgW1FRtQIY"
+            videoId="AXy7jHn8Azs"
             onClose={() => setOpen3(false)}
           />
           <ModalVideo
             channel="youtube"
             autoplay
             isOpen={isOpen4}
-            videoId="oPgW1FRtQIY"
+            videoId="WlVV5hjyy0w"
             onClose={() => setOpen4(false)}
           />
           <ModalVideo
             channel="youtube"
             autoplay
             isOpen={isOpen5}
-            videoId="oPgW1FRtQIY"
+            videoId="g9gjuutlZmY"
+            onClose={() => setOpen5(false)}
+          />
+          <ModalVideo
+            channel="youtube"
+            autoplay
+            isOpen={isOpen6}
+            videoId="q7E4NOzHrkc"
             onClose={() => setOpen5(false)}
           />
         </Col>
