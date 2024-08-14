@@ -1,10 +1,18 @@
+import { config } from "@fortawesome/fontawesome-svg-core";
+import "@fortawesome/fontawesome-svg-core/styles.css";
+import { faCirclePlay } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { StaticImage } from "gatsby-plugin-image";
 import React, { useState } from "react";
+import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import ModalVideo from "react-modal-video";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
+
+config.autoAddCss = false;
 
 function Interviews() {
   const [isOpen, setOpen] = useState(false);
@@ -31,77 +39,114 @@ function Interviews() {
             navigation={true}
             pagination={{ clickable: true }}
             loop={true}
-            slidesPerView={2}
+            slidesPerView={6}
           >
             <SwiperSlide>
-              <div className="video-container"></div>
               <div onClick={() => setOpen(true)} aria-hidden="true">
-                <StaticImage
-                  src="../images/assets/cover1.jpg"
-                  alt="honda entrevista"
-                  layout="fullWidth"
-                  role="button"
-                />
-              </div>
-            </SwiperSlide>
-            <SwiperSlide>
-              <div onClick={() => setOpen(true)} aria-hidden="true">
-                <StaticImage
-                  src="../images/assets/cover1.jpg"
-                  alt="honda entrevista"
-                  layout="fullWidth"
-                  role="button"
-                />
+                <Card className="border-0 card-interview">
+                  <StaticImage
+                    src="../images/assets/entrevistas/andres-feican.jpg"
+                    alt="Andrés Feicán"
+                    layout="fullWidth"
+                    role="button"
+                  />
+                  <Card.ImgOverlay className="d-flex align-items-center justify-content-center">
+                    <FontAwesomeIcon
+                      icon={faCirclePlay}
+                      className="ms-3 icon-play"
+                    />
+                  </Card.ImgOverlay>
+                </Card>
               </div>
             </SwiperSlide>
             <SwiperSlide>
               <div onClick={() => setOpen2(true)} aria-hidden="true">
-                <StaticImage
-                  src="../images/assets/cover2.jpg"
-                  alt="honda entrevista"
-                  layout="fullWidth"
-                  role="button"
-                />
+                <Card className="border-0 card-interview">
+                  <StaticImage
+                    src="../images/assets/entrevistas/dani-aleman.jpg"
+                    alt="Dani Alemán"
+                    layout="fullWidth"
+                    role="button"
+                  />
+                  <Card.ImgOverlay className="d-flex align-items-center justify-content-center">
+                    <FontAwesomeIcon
+                      icon={faCirclePlay}
+                      className="ms-3 icon-play"
+                    />
+                  </Card.ImgOverlay>
+                </Card>
               </div>
             </SwiperSlide>
             <SwiperSlide>
               <div onClick={() => setOpen3(true)} aria-hidden="true">
-                <StaticImage
-                  src="../images/assets/cover3.jpg"
-                  alt="honda entrevista"
-                  layout="fullWidth"
-                  role="button"
-                />
+                <Card className="border-0 card-interview">
+                  <StaticImage
+                    src="../images/assets/entrevistas/niki-merchan.jpg"
+                    alt="Niki Merchán"
+                    layout="fullWidth"
+                    role="button"
+                  />
+                  <Card.ImgOverlay className="d-flex align-items-center justify-content-center">
+                    <FontAwesomeIcon
+                      icon={faCirclePlay}
+                      className="ms-3 icon-play"
+                    />
+                  </Card.ImgOverlay>
+                </Card>
               </div>
             </SwiperSlide>
             <SwiperSlide>
               <div onClick={() => setOpen4(true)} aria-hidden="true">
-                <StaticImage
-                  src="../images/assets/cover4.jpg"
-                  alt="honda entrevista"
-                  layout="fullWidth"
-                  role="button"
-                />
+                <Card className="border-0 card-interview">
+                  <StaticImage
+                    src="../images/assets/entrevistas/italo-medina.jpg"
+                    alt="Ítalo Medina"
+                    layout="fullWidth"
+                    role="button"
+                  />
+                  <Card.ImgOverlay className="d-flex align-items-center justify-content-center">
+                    <FontAwesomeIcon
+                      icon={faCirclePlay}
+                      className="ms-3 icon-play"
+                    />
+                  </Card.ImgOverlay>
+                </Card>
               </div>
             </SwiperSlide>
             <SwiperSlide>
               <div onClick={() => setOpen5(true)} aria-hidden="true">
-                <StaticImage
-                  src="../images/assets/cover5.jpg"
-                  alt="honda entrevista"
-                  layout="fullWidth"
-                  role="button"
-                />
+                <Card className="border-0 card-interview">
+                  <StaticImage
+                    src="../images/assets/entrevistas/jose-cardenas.jpg"
+                    alt="José Cárdenas"
+                    layout="fullWidth"
+                    role="button"
+                  />
+                  <Card.ImgOverlay className="d-flex align-items-center justify-content-center">
+                    <FontAwesomeIcon
+                      icon={faCirclePlay}
+                      className="ms-3 icon-play"
+                    />
+                  </Card.ImgOverlay>
+                </Card>
               </div>
             </SwiperSlide>
             <SwiperSlide>
               <div onClick={() => setOpen6(true)} aria-hidden="true">
-                <StaticImage
-                  src="../images/assets/cover5.jpg"
-                  alt="honda entrevista"
-                  layout="fullWidth"
-                  role="button"
-                />
+                <Card className="border-0 card-interview">
+                  <StaticImage
+                    src="../images/assets/entrevistas/personal.jpg"
+                    alt="Personal"
+                    layout="fullWidth"
+                    role="button"
+                  />
+                  <Card.ImgOverlay className="d-flex align-items-center justify-content-center">
+                    <FontAwesomeIcon
+                      icon={faCirclePlay}
+                      className="ms-3 icon-play"
+                    />
+                  </Card.ImgOverlay>
+                </Card>
               </div>
             </SwiperSlide>
           </Swiper>
@@ -149,7 +194,7 @@ function Interviews() {
             autoplay
             isOpen={isOpen6}
             videoId="q7E4NOzHrkc"
-            onClose={() => setOpen5(false)}
+            onClose={() => setOpen6(false)}
           />
         </Col>
       </Row>

@@ -62,6 +62,23 @@ body {
   max-width: 700px;
 }
 
+.card-interview {
+  transition: transform 0.2s ease;
+  cursor: pointer;
+}
+
+.card-interview:hover .icon-play {
+  transform: scale(1.2);
+  color: rgb(255, 255, 255, 0.8);
+}
+
+.icon-play {
+  transition: transform 0.2s ease;
+  color: rgb(255, 255, 255, 0.6);
+  font-size: 40px;
+  cursor: pointer;
+}
+
 .contact-form p {
   color: #ffffff;
   font-family: Bourgeois-Medium;
