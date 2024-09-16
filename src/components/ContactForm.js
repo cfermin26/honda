@@ -12,6 +12,7 @@ import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import { Controller, useForm } from "react-hook-form";
 import Swal from "sweetalert2";
+import pdfUrl from "../docs/AUTORIZACION_TRATAMIENTO_DATOS_PERSONALES.pdf";
 
 const queryString = require("query-string");
 
@@ -442,7 +443,19 @@ function ContactForm() {
                     render={({ field }) => (
                       <Form.Check
                         type="checkbox"
-                        label="Acepto los términos y condiciones"
+                        label={
+                          <span>
+                            <a
+                              href={pdfUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              onClick={(e) => e.stopPropagation()}
+                            >
+                              Acepto los términos y condiciones
+                            </a>
+                          </span>
+                        }
+                        rel="noreferer noopener"
                         id="terms"
                         {...field}
                         isInvalid={!!errors.terms}
