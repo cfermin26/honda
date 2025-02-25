@@ -172,6 +172,7 @@ function ContactForm() {
         reset();
         setSelectedProducto("");
         setSelectedTiempoCompra("");
+        setSelectedMetodoPago("");
       } catch (error) {
         Toast.fire({
           icon: "error",
