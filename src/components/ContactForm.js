@@ -44,9 +44,12 @@ function ContactForm() {
   const [cities, setCities] = useState([]);
   const [selectedCiudad, setSelectedCiudad] = useState(null);
   const [tiemposCompra, setTiemposCompra] = useState([]);
+  const [metodosPago, setMetodosPago] = useState([]);
   const [selectedTiempoCompra, setSelectedTiempoCompra] = useState("");
   const [selectedTiempoCompraNombre, setSelectedTiempoCompraNombre] =
     useState("");
+  const [selectedMetodoPagoNombre, setSelectedMetodoPagoNombre] = useState("");
+  const [selectedMetodoPago, setSelectedMetodoPago] = useState("");
   const [token, setToken] = useState("");
 
   const handleChangeCelular = (e) => {
@@ -94,9 +97,11 @@ function ContactForm() {
       const options = await authenticate();
       if (options) {
         try {
-          const { ciudades, tiemposCompra } = await fetchData(options);
+          const { ciudades, tiemposCompra, metodosPago } =
+            await fetchData(options);
           setCiudades(ciudades);
           setTiemposCompra(tiemposCompra);
+          setMetodosPago(metodosPago.data);
           const uniqueCities = [
             ...new Map(
               ciudades.map((item) => [item.ciudad_codigo, item])
@@ -151,6 +156,8 @@ function ContactForm() {
           codproducto: parseInt(data.producto),
           tiempo_compra: parseInt(data.tiempoCompra),
           tiempo_compra_nombre: selectedTiempoCompraNombre,
+          forma_pago_dato: selectedMetodoPagoNombre,
+          cod_forma_pago: data.formaPago,
           aceptacion: 1,
         };
 
@@ -430,6 +437,51 @@ function ContactForm() {
                   />
                 </FloatingLabel>
                 {errors.tiempoCompra && <p>{errors.tiempoCompra.message}</p>}
+              </Col>
+              <Col md={6}>
+                <FloatingLabel label="Forma de pago">
+                  <Controller
+                    name="formaPago"
+                    control={control}
+                    defaultValue=""
+                    rules={{
+                      required: "La forma de pago es requerido",
+                    }}
+                    render={({ field }) => (
+                      <Form.Select
+                        label="Forma de pago"
+                        id="formaPago"
+                        color="warning"
+                        {...field}
+                        value={selectedMetodoPago}
+                        onChange={(e) => {
+                          const selectedValue = e.target.value;
+                          setSelectedMetodoPago(selectedValue);
+
+                          // Busca el nombre del método de pago usando el código seleccionado
+                          const selectedMetodo = metodosPago.find(
+                            (metodo) => metodo.fpam_codigo === selectedValue
+                          );
+                          setSelectedMetodoPagoNombre(
+                            selectedMetodo ? selectedMetodo.fpam_nombre : ""
+                          );
+                          field.onChange(e); // Asegura que se registre el cambio en react-hook-form
+                        }}
+                      >
+                        <option value="">- Seleccione -</option>
+                        {metodosPago?.map((metodoPago) => (
+                          <option
+                            key={metodoPago.fpam_codigo}
+                            value={metodoPago.fpam_codigo}
+                          >
+                            {metodoPago.fpam_nombre}
+                          </option>
+                        ))}
+                      </Form.Select>
+                    )}
+                  />
+                </FloatingLabel>
+                {errors.formaPago && <p>{errors.formaPago.message}</p>}
               </Col>
               <Col md={12} className="text-center legal">
                 <Form.Group className="d-flex justify-content-center">
