@@ -1,5 +1,5 @@
-/* const API = 'https://desarrolloktm.curbe.com.ec'; */
-const API = "https://desarrollohonda.curbe.com.ec";
+const API = "https://honda.curbe.com.ec";
+// const API = "https://desarrollohonda.curbe.com.ec";
 
 const endPoints = {
   auth: {
