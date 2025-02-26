@@ -461,8 +461,10 @@ function ContactForm() {
 
                           // Busca el nombre del método de pago usando el código seleccionado
                           const selectedMetodo = metodosPago.find(
-                            (metodo) => metodo.fpam_codigo === selectedValue
+                            (metodo) =>
+                              metodo.fpam_codigo === parseInt(selectedValue, 10)
                           );
+
                           setSelectedMetodoPagoNombre(
                             selectedMetodo ? selectedMetodo.fpam_nombre : ""
                           );
